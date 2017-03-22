@@ -4,19 +4,15 @@ require('redis-mock');
 require.cache[require.resolve('redis')] = require.cache[require.resolve('redis-mock')];
 
 const FormData = require('form-data');
-const P = require('bluebird');
 const fetch = require('node-fetch');
 const fs = require('fs-extra-promise');
 const path = require('path');
 const pool = require('@npmcorp/redis-pool');
-const restify = require('restify');
 const restifyFixture = require('restify-test-fixture');
 const tap = require('tap');
 const upload = require('../upload')
 const withFixtures = require('with-fixtures');
 const { tempdirFixture } = require('mixed-fixtures');
-
-P.promisifyAll(restify.JsonClient.prototype);
 
 tap.test('upload handler', async t => {
 
