@@ -24,7 +24,8 @@
     "fs-extra-promise": "^0.4.1",
     "node-fetch": "^1.6.3",
     "pump": "^1.0.2",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "sharp": "^0.17.2"
   },
   "eslintConfig": {
     "parserOptions": {
