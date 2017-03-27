@@ -47,6 +47,10 @@ tap.test('serve-file handler', async t => {
 
     t.equal(res.headers.get('content-type'), 'image/jpeg');
     t.equal(res.status, 200);
+
+    if (res.status != 200) {
+      t.equal(await res.json(), null);
+    }
   });
 })
 
