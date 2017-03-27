@@ -14,7 +14,7 @@ module.exports = function (opts) {
             }
             const dir = path.resolve(root, req.params.team, req.params.user)
             const file = req.params.file;
-            const metadata = await fse.readJsonAsync(path.resolve(dir, path.basename(file, path.extname(file))) + '.json');
+            const metadata = await metadataForImage(dir, file);
             res.setHeader('Content-Type', metadata.type);
             pump(fse.createReadStream(path.resolve(dir, file)), res, next);
         } catch (e) {
@@ -22,3 +22,11 @@ module.exports = function (opts) {
         }
     };
 };
+
+async function metadataForImage(dir, file) {
+    dir = path.normalize(dir);
+    file = path.normalize(path.resolve(dir, file));
+    if (file.indexOf(dir) != 0) throw new Error(`${file} not within ${dir}`); 
+    const metadata = await fse.readJsonAsync(path.resolve(dir, path.basename(file, path.extname(file))) + '.json');
+    return metadata;
+}
